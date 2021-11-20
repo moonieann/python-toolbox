@@ -1,26 +1,32 @@
 import os
 
+
 class WrongFormatError(Exception):
     pass
+
 
 class EmptyFileError(Exception):
     pass
 
+
 class BrokenFormatError(Exception):
     pass
+
 
 class BrokenReaderError(Exception):
     pass
 
-try: #Python3
-    FileNotFoundError=FileNotFoundError
-except NameError: # Python2
+
+try:                                                # Python3
+    FileNotFoundError = FileNotFoundError
+except NameError:                                   # Python2
     FileNotFoundError = IOError
 
+
 class File(dict):
-    def __init__(self,filename=None,**kwargs):
-        self._size=None
-        self._encoding=None
+    def __init__(self, filename=None, **kwargs):
+        self._size = None
+        self._encoding = None
         if filename:
             self.read(filename, **kwargs)
         else:
@@ -32,9 +38,9 @@ class File(dict):
         if not self.filename:
             raise Exception('No filename provided')
         if not os.path.isfile(self.filename):
-            raise OSError(2,'File not found:',self.filename)
+            raise OSError(2, 'File not found:', self.filename)
         if os.stat(self.filename).st_size == 0:
-            raise EmptyFileError('File is empty:',self.filename)
+            raise EmptyFileError('File is empty:', self.filename)
         # Calling children function
         self._read(**kwargs)
 
@@ -82,7 +88,9 @@ class File(dict):
     # --------------------------------------------------------------------------------
     # --- Sub class methods 
     # --------------------------------------------------------------------------------
-    def _read(self,**kwargs):
+
+
+    def _read(self, **kwargs):
         raise NotImplementedError("Method must be implemented in the subclass")
 
     def _write(self):
@@ -112,27 +120,27 @@ class File(dict):
         raise NotImplementedError("Method must be implemented in the subclass")
 
     @classmethod
-    def isRightFormat(cls,filename):
+    def isRightFormat(cls, filename):
         """ Tries to open a file, return true and the file if it succeeds """
-        #raise NotImplementedError("Method must be implemented in the subclass")
+        # raise NotImplementedError("Method must be implemented in the subclass")
         try:
-            F=cls(filename=filename)
-            return True,F
+            F = cls(filename=filename)
+            return True, F
         except MemoryError:
             raise
         except WrongFormatError:
-            return False,None
+            return False, None
         except:
             raise
 
-    def test_write_read(self,bDelete=False):
+    def test_write_read(self, bDelete=False):
         """ Test that we can write and then read what we wrote
         NOTE: this does not check that what we read is the same..
         """
         # --- First, test write function (assuming read)
         try:
-            f,ext=os.path.splitext(self.filename)
-            filename_out = f+'_TMP'+ext
+            f, ext = os.path.splitext(self.filename)
+            filename_out = f+'_TMP' + ext
             self.write(filename_out)
         except Exception as e:
             raise Exception('Error writing what we read\n'+e.args[0])
@@ -145,12 +153,12 @@ class File(dict):
             os.remove(filename_out)
         return filename_out
 
-    def test_ascii(self,bCompareWritesOnly=False,bDelete=True):
+    def test_ascii(self, bCompareWritesOnly=False, bDelete=True):
         # compare ourselves (assuming read has occured) with what we write
 
-        f,ext=os.path.splitext(self.filename)
+        f, ext = os.path.splitext(self.filename)
         # --- Perform a simple write/read test
-        filename_out=self.test_write_read()
+        filename_out = self.test_write_read()
 
         # --- Perform ascii comparison (and delete if success)
         if bCompareWritesOnly:
@@ -160,17 +168,19 @@ class File(dict):
         else:
             f1 = f+ext
             f2 = filename_out
-        bStat=ascii_comp(f1,f2,bDelete=bDelete)
+        bStat = ascii_comp(f1, f2, bDelete=bDelete)
 
         if bStat:
             if bCompareWritesOnly and bDelete:
                 os.remove(f1)
         else:
-            raise Exception('The ascii content of {} and {} are different'.format(f1,f2))
+            raise Exception('The ascii content of {} and {} are different'.format(f1, f2))
 
 # --------------------------------------------------------------------------------}
 # --- Helper functions
 # --------------------------------------------------------------------------------{
+
+
 def isBinary(filename):
     from io import open
     with open(filename, 'r') as f:
@@ -180,24 +190,25 @@ def isBinary(filename):
             # then look for weird characters
             for c in l:
                 code = ord(c)
-                if code<10 or (code>14 and code<31):
+                if code < 10 or (code > 14 and code < 31):
                     return True
             return False
         except UnicodeDecodeError:
             return True
 
-def ascii_comp(file1,file2,bDelete=False):
+
+def ascii_comp(file1, file2, bDelete=False):
     """ Compares two ascii files line by line.
     Comparison is done ignoring multiple white spaces for now"""
     # --- Read original as ascii
     with open(file1, 'r') as f1:
-        lines1 = f1.read().splitlines();
-        lines1 = '|'.join([l.replace('\t',' ').strip() for l in lines1])
+        lines1 = f1.read().splitlines()
+        lines1 = '|'.join([l.replace('\t', ' ').strip() for l in lines1])
         lines1 = ' '.join(lines1.split())
     # --- Read second file as ascii
     with open(file2, 'r') as f2:
-        lines2 = f2.read().splitlines();
-        lines2 = '|'.join([l.replace('\t',' ').strip() for l in lines2])
+        lines2 = f2.read().splitlines()
+        lines2 = '|'.join([l.replace('\t', ' ').strip() for l in lines2])
         lines2 = ' '.join(lines2.split())
 
     if lines1 == lines2:
