@@ -614,20 +614,20 @@ class FASTInputFile(File):
                     x = Val[:, 0]
                     Modes = np.zeros((x.shape[0], 3))
                     Modes[:, 0] = x**2 * self['BldFl1Sh(2)'] \
-                               + x**3 * self['BldFl1Sh(3)'] \
-                               + x**4 * self['BldFl1Sh(4)'] \
-                               + x**5 * self['BldFl1Sh(5)'] \
-                               + x**6 * self['BldFl1Sh(6)'] 
+                                + x**3 * self['BldFl1Sh(3)'] \
+                                + x**4 * self['BldFl1Sh(4)'] \
+                                + x**5 * self['BldFl1Sh(5)'] \
+                                + x**6 * self['BldFl1Sh(6)']
                     Modes[:, 1] = x**2 * self['BldFl2Sh(2)'] \
-                               + x**3 * self['BldFl2Sh(3)'] \
-                               + x**4 * self['BldFl2Sh(4)'] \
-                               + x**5 * self['BldFl2Sh(5)'] \
-                               + x**6 * self['BldFl2Sh(6)'] 
+                                + x**3 * self['BldFl2Sh(3)'] \
+                                + x**4 * self['BldFl2Sh(4)'] \
+                                + x**5 * self['BldFl2Sh(5)'] \
+                                + x**6 * self['BldFl2Sh(6)']
                     Modes[:, 2] = x**2 * self['BldEdgSh(2)'] \
-                               + x**3 * self['BldEdgSh(3)'] \
-                               + x**4 * self['BldEdgSh(4)'] \
-                               + x**5 * self['BldEdgSh(5)'] \
-                               + x**6 * self['BldEdgSh(6)'] 
+                                + x**3 * self['BldEdgSh(3)'] \
+                                + x**4 * self['BldEdgSh(4)'] \
+                                + x**5 * self['BldEdgSh(5)'] \
+                                + x**6 * self['BldEdgSh(6)']
                     Val = np.hstack((Val, Modes))
                     Cols = Cols + ['ShapeFlap1_[-]', 'ShapeFlap2_[-]', 'ShapeEdge1_[-]']
                   
@@ -718,7 +718,7 @@ class FASTInputFile(File):
         return dfs
 
     '''
-    def toGraph(self, fast_input_file_graph=None):
+    def toGraph(self):
         from .fast_input_file_graph import fastToGraph
         return fastToGraph(self)
     '''
@@ -1230,12 +1230,10 @@ def parseFASTFilTable(lines, n, iStart):
 
 
 if __name__ == "__main__":
-    pass
+    # pass
     # B=FASTIn('Turbine.outb')
-    '''
-    filename = 'AeroDyn.dat'
+    filename = 'E:/Documents/Git/OpenFAST/python-toolbox/pyFAST/input_output/tests/example_files/FASTIn_AD14.dat'
     f = FASTInputFile(filename)
     f['TwrAero'] = True
-    f['AirDens'] = 1.225
-    f.write('AeroDyn_Changed.dat')
-    '''
+    f['AirDens'] = 1.8
+    f.write('E:/Documents/Git/OpenFAST/python-toolbox/pyFAST/input_output/tests/example_files/FASTIn_AD14_Changed.dat')
