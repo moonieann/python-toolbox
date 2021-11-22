@@ -12,7 +12,7 @@ from functools import reduce
 import collections
 
 try:
-    from .file import File, EmptyFileError, WrongFormatError, BrokenFormatError
+    from file import File, EmptyFileError, WrongFormatError, BrokenFormatError
 except ImportError:
     EmptyFileError   = type('EmptyFileError', (Exception,),{})
     WrongFormatError =  type('WrongFormatError', (Exception,),{})

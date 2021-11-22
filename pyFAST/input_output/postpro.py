@@ -24,7 +24,7 @@ def ED_BldStations(ED):
         - bld_fract: fraction of the blade length were stations are defined
         - r_nodes: spanwise position from the rotor apex of the Blade stations
     """
-    if hasattr(ED,'startswith'): # if string
+    if hasattr(ED,'startswith'):           # if string
         ED = FASTInputFile(ED)
 
     nBldNodes = ED['BldNodes']
@@ -43,7 +43,7 @@ def ED_TwrStations(ED):
         - r_fract: fraction of the towet length were stations are defined
         - h_nodes: height from the *ground* of the stations  (not from the Tower base)
     """
-    if hasattr(ED,'startswith'): # if string
+    if hasattr(ED,'startswith'):               # if string
         ED = FASTInputFile(ED)
 
     nTwrNodes = ED['TwrNodes']
