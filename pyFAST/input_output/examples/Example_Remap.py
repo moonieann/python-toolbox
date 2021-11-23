@@ -11,9 +11,9 @@ import pyFAST.input_output.postpro as postpro
 
 if __name__ == '__main__':
     ColumnMap = {
-      'WS_[m/s]'         : '{Wind1VelX_[m/s]}'             ,         # create a new column from existing one
-      'RtTSR_[-]'        : '{RtTSR_[-]} * 2  +  {RtAeroCt_[-]}'    ,      # change value of column
-      'RotSpeed_[rad/s]' : '{RotSpeed_[rpm]} * 2*np.pi/60 ',           # new column [rpm] -> [rad/s]
+      'WS_[m/s]'         : '{Wind1VelX_[m/s]}',                       # create a new column from existing one
+      'RtTSR_[-]'        : '{RtTSR_[-]} * 2  +  {RtAeroCt_[-]}',      # change value of column
+      'RotSpeed_[rad/s]' : '{RotSpeed_[rpm]} * 2*np.pi/60',           # new column [rpm] -> [rad/s]
     }
 
     # Get current directory so this script can be called from any location
@@ -23,5 +23,5 @@ if __name__ == '__main__':
     df = io.fast_output_file.FASTOutputFile(outFile).toDataFrame()
     # Change columns based on formulae, potentially adding new columns
     df = postpro.remap_df(df, ColumnMap)
-    # print(df)
-    # df.to_csv('_Out.csv', index=False)
+    print(df)
+    df.to_csv('fastout_allnodes_Out.csv', index=False)
