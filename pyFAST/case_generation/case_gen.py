@@ -16,9 +16,6 @@ import pyFAST.case_generation.runner as runner
 import pyFAST.input_output.postpro as postpro
 
 
-# Get current directory so this script can be called from any location
-MyDir = os.path.dirname(__file__)
-
 # --------------------------------------------------------------------------------}
 # --- Template replace 
 # --------------------------------------------------------------------------------{
@@ -597,6 +594,6 @@ if __name__ == '__main__':
     PARAMS['ServoFile|VS_Rgn2K']    = 0.00038245
     PARAMS['ServoFile|GenEff']      = 0.95
     PARAMS['InflowFile|HWindSpeed'] = 8
-    # refDir = os.path.join(MyDir, '../../../data/NREL5MW/')
+    # refDir = os.path.join(MyDir, '../../data/NREL5MW/')
     # templateReplace(PARAMS, refDir, removeRefSubFiles=True)
     # templateReplace(PARAMS, templateDir=refDir, removeRefSubFiles=True)
