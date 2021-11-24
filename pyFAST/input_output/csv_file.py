@@ -287,7 +287,9 @@ class CSVFile(File):
         return self.data
 
 
+'''
 if __name__ == "__main__":
     f = CSVFile('E:/Documents/Git/OpenFAST/python-toolbox/pyFAST/input_output/tests/example_files/CSVDateNaN.csv')
     df = f.toDataFrame()
     print(df)
+'''
