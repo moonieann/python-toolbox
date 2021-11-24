@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 import shutil 
 import stat
-# import re
+import re
 import weio
 
 # --- Misc fast libraries
