@@ -319,6 +319,7 @@ class FASTLinearizationFile(File):
         return dfs
 
 
+'''
 if __name__ == '__main__':
     f = FASTLinearizationFile('E:/Documents/Git/OpenFAST/python-toolbox/pyFAST/input_output/tests/example_files/FASTLin_EDM.lin')
     print(f.keys())
@@ -329,3 +330,4 @@ if __name__ == '__main__':
     df = f.toDataFrame()
     print(df['A'].columns)
     # print(df['A'])
+'''
