@@ -8,7 +8,7 @@ import numpy as np
 import shutil 
 import stat
 import re
-import weio
+import weio.fast_wind_file as fastwind
 
 # --- Misc fast libraries
 import pyFAST.input_output.fast_input_file as fi
@@ -156,11 +156,11 @@ def templateReplaceGeneral(PARAMS, templateDir=None, outputDir=None, main_file=N
                 newfilename      = strID+ext
             else:
                 newfilename, newfilename_full = rebaseFileName(templatefilename, workDir, strID)
-            # print('--------------------------------------------------------------')
-            # print('TemplateFile    :', templatefilename)
-            # print('TemplateFileFull:', templatefilename_full)
-            # print('NewFile         :', newfilename)
-            # print('NewFileFull     :', newfilename_full)
+            print('--------------------------------------------------------------')
+            print('TemplateFile    :', templatefilename)
+            print('TemplateFileFull:', templatefilename_full)
+            print('NewFile         :', newfilename)
+            print('NewFileFull     :', newfilename_full)
             shutil.copyfile(templatefilename_full, newfilename_full)
             f = fi.FASTInputFile(newfilename_full)    # open the template file for that filekey
             Files[FileKey] = f              # store it
@@ -301,31 +301,41 @@ def removeFASTOuputs(workDir):
 # --------------------------------------------------------------------------------{
 
 
-def paramsSteadyAero(p=dict()):
+def paramsSteadyAero(p=None):
+    if p is None:
+        p = dict()
     p['AeroFile|AFAeroMod'] = 1               # remove dynamic effects dynamic
     p['AeroFile|WakeMod'] = 1                 # remove dynamic inflow dynamic
     p['AeroFile|TwrPotent'] = 0               # remove tower shadow
     return p
 
 
-def paramsNoGen(p=dict()):
+def paramsNoGen(p=None):
+    if p is None:
+        p = dict()
     p['EDFile|GenDOF'] = 'False'
     return p
 
 
-def paramsGen(p=dict()):
+def paramsGen(p=None):
+    if p is None:
+        p = dict()
     p['EDFile|GenDOF'] = 'True'
     return p
 
 
-def paramsNoController(p=dict()):
+def paramsNoController(p=None):
+    if p is None:
+        p = dict()
     p['ServoFile|PCMode']   = 0
     p['ServoFile|VSContrl'] = 0
     p['ServoFile|YCMode']   = 0
     return p
 
 
-def paramsControllerDLL(p=dict()):
+def paramsControllerDLL(p=None):
+    if p is None:
+        p = dict()
     p['ServoFile|PCMode']   = 5
     p['ServoFile|VSContrl'] = 5
     p['ServoFile|YCMode']   = 5
@@ -333,7 +343,9 @@ def paramsControllerDLL(p=dict()):
     return p
 
 
-def paramsStiff(p=dict()):
+def paramsStiff(p=None):
+    if p is None:
+        p = dict()
     p['EDFile|FlapDOF1']  = 'False'
     p['EDFile|FlapDOF2']  = 'False'
     p['EDFile|EdgeDOF' ]  = 'False'
@@ -402,9 +414,11 @@ def paramsWS_RPM_Pitch(WS, RPM, Pitch, baseDict=None, FlatInputs=False):
     return PARAMS
 
 
-def paramsLinearTrim(p=dict()):
+def paramsLinearTrim(p=None):
 
     # Set a few DOFs, move this to main file
+    if p is None:
+        p = dict()
     p['Linearize']              = True
     p['CalcSteady']             = True
     p['TrimGain']               = 1e-4
@@ -452,7 +466,7 @@ def paramsLinearTrim(p=dict()):
 
 
 def createStepWind(filename, WSstep=1, WSmin=3, WSmax=25, tstep=100, dt=0.5, tmin=0, tmax=999):
-    f = weio.fast_wind_file.FASTWndFile()
+    f = fastwind.FASTWndFile()
     Steps = np.arange(WSmin, WSmax+WSstep, WSstep)
     print(Steps)
     nCol = len(f.colNames)
