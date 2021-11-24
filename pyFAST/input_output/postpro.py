@@ -1189,3 +1189,6 @@ def averagePostPro(outFiles, avgMethod='periods', avgParam=None, ColMap=None, Co
         print('[WARN] There were {} missing/invalid files: {}'.format(len(invalidFiles), invalidFiles))
 
     return result 
+
+if __name__ == '__main__':
+    main()
