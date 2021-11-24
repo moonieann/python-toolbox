@@ -244,7 +244,8 @@ class FASTInputDeck(dict):
         s += '\n'
         return s
 
-
+'''
 if __name__ == "__main__":
     fst = FASTInputDeck('E:/Documents/Git/OpenFAST/openfast/reg_tests/r-test/glue-codes/openfast/5MW_Land_DLL_WTurb/5MW_Land_DLL_WTurb.fst')
     print(fst)
+'''
