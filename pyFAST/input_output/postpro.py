@@ -1190,5 +1190,7 @@ def averagePostPro(outFiles, avgMethod='periods', avgParam=None, ColMap=None, Co
 
     return result 
 
+'''
 if __name__ == '__main__':
     main()
+'''

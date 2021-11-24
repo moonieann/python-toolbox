@@ -581,6 +581,7 @@ def CPCT_LambdaPitch(refdir, main_fastfile, Lambda=None, Pitch=np.linspace(-10, 
     return MCP, MCT, Lambda, Pitch, MaxVal, result
 
 
+'''
 if __name__ == '__main__':
     # --- Test of templateReplace
     PARAMS                          = {}
@@ -594,6 +595,5 @@ if __name__ == '__main__':
     PARAMS['ServoFile|VS_Rgn2K']    = 0.00038245
     PARAMS['ServoFile|GenEff']      = 0.95
     PARAMS['InflowFile|HWindSpeed'] = 8
-    # refDir = os.path.join(MyDir, '../../data/NREL5MW/')
-    # templateReplace(PARAMS, refDir, removeRefSubFiles=True)
-    # templateReplace(PARAMS, templateDir=refDir, removeRefSubFiles=True)
+    # templateReplace(PARAMS, refDir, RemoveRefSubFiles=True)
+'''

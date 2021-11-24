@@ -172,9 +172,10 @@ def removeFASTOuputs(workDir):
     for f in glob.glob(os.path.join(workDir, '*.sum')):
         os.remove(f)
 
-
+'''
 if __name__ == '__main__':
     # run_cmds(['main1.fst','main2.fst'], './Openfast.exe', parallel=True, showOutputs=False, nCores=4, showCommand=True)
     run_cmds(['E:/Documents/Git/OpenFAST/openfast/reg_tests/r-test/glue-codes/openfast/5MW_Land_DLL_WTurb/5MW_Land_DLL_WTurb.fst'], './openfast_x64.exe', parallel=True, showOutputs=False, nCores=4, showCommand=True)
     pass
     # --- Test of templateReplace
+'''
