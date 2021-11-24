@@ -207,8 +207,8 @@ class FASTInputFile(File):
             line = lines[i]
             # OUTLIST Exceptions
             if line.upper().find('ADDITIONAL OUTPUTS') > 0 \
-            or line.upper().find('MESH-BASED OUTPUTS') > 0 \
-            or line.upper().find('OUTPUT CHANNELS'   ) > 0:
+                    or line.upper().find('MESH-BASED OUTPUTS') > 0\
+                    or line.upper().find('OUTPUT CHANNELS') > 0:
                 # TODO, lazy implementation so far, MAKE SUB FUNCTION
                 parts = re.match(r'^\W*\w+', line)
                 if parts:
@@ -222,7 +222,7 @@ class FASTInputFile(File):
                 d['label']   = firstword
                 d['descr']   = remainer
                 d['tabType'] = TABTYPE_FIL             # TODO
-                d['value']   = ['']+OutList
+                d['value']   = [''] + OutList
                 self.data.append(d)
                 if i >= len(lines):
                     break
@@ -717,11 +717,10 @@ class FASTInputFile(File):
             dfs = dfs[list(dfs.keys())[0]]
         return dfs
 
-    '''
+
     def toGraph(self):
-        from .fast_input_file_graph import fastToGraph
+        from fast_input_file_graph import fastToGraph
         return fastToGraph(self)
-    '''
 
 
 # --------------------------------------------------------------------------------}
@@ -796,9 +795,7 @@ class FASTInputFile(File):
         except: 
             raise
 
-
         return True
-        
 
 
     def detectAndReadAirfoil(self, lines):
@@ -1230,10 +1227,12 @@ def parseFASTFilTable(lines, n, iStart):
 
 
 if __name__ == "__main__":
-    # pass
+    pass
     # B=FASTIn('Turbine.outb')
+    '''
     filename = 'E:/Documents/Git/OpenFAST/python-toolbox/pyFAST/input_output/tests/example_files/FASTIn_AD14.dat'
     f = FASTInputFile(filename)
     f['TwrAero'] = True
     f['AirDens'] = 1.8
     f.write('E:/Documents/Git/OpenFAST/python-toolbox/pyFAST/input_output/tests/example_files/FASTIn_AD14_Changed.dat')
+    '''
