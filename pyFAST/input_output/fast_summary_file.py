@@ -77,11 +77,9 @@ class FASTSummaryFile(File):
         # dfs = subDynToDataFrame(self)
         # return dfs
 
-    '''
     def toGraph(self):
-        from .fast_input_file_graph import fastToGraph
+        from fast_input_file_graph import fastToGraph
         return fastToGraph(self)
-    '''
 
 
 # --------------------------------------------------------------------------------}
