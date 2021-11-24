@@ -302,6 +302,6 @@ class TurbSimFile(File):
 
 
 if __name__ == '__main__':
-    ts = TurbSimFile('E:/Documents/Git/OpenFAST/python-toolbox/pyFAST/input_output/tests/example_files/TurbSim_WithTwr.bts')
+    ts = TurbSimFile('./tests/example_files/TurbSim_WithTwr.bts')
     print(ts.keys())
     print(ts['u'].shape)
