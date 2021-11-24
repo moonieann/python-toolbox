@@ -68,8 +68,8 @@ def ED_BldGag(ED):
         ED = FASTInputFile(ED)
     _, r_nodes = ED_BldStations(ED)
     
-    #         if ED.hasNodal:
-    #         return r_nodes, None
+    # if ED.hasNodal:
+    # return r_nodes, None
     nOuts = ED['NBlGages']
     if nOuts <= 0:
         return np.array([]), np.array([])
@@ -91,7 +91,7 @@ def ED_TwrGag(ED):
        - h_gag: The heights of the gages, given from the ground height (tower base + TowerBsHt)
     """
     if hasattr(ED, 'startswith'):          # if string
-        ED   = FASTInputFile(ED)
+        ED = FASTInputFile(ED)
     _, h_nodes = ED_TwrStations(ED)
     nOuts = ED['NTwGages']
     if nOuts <= 0:
@@ -118,9 +118,9 @@ def AD14_BldGag(AD):
 
     Nodes = AD['BldAeroNodes']
     if Nodes.shape[1] == 6:
-        doPrint = np.array([n.lower().find('p') == 0  for n in Nodes[:, 5]])
+        doPrint = np.array([n.lower().find('p') == 0 for n in Nodes[:, 5]])
     else:
-        doPrint = np.array([True  for n in Nodes[:, 0]])
+        doPrint = np.array([True for n in Nodes[:, 0]])
 
     r_gag = Nodes[doPrint, 0].astype(float)
     IR    = np.arange(1, len(Nodes)+1)[doPrint]
@@ -1189,9 +1189,3 @@ def averagePostPro(outFiles, avgMethod='periods', avgParam=None, ColMap=None, Co
         print('[WARN] There were {} missing/invalid files: {}'.format(len(invalidFiles), invalidFiles))
 
     return result 
-
-
-'''
-if __name__ == '__main__':
-    main()
-'''
