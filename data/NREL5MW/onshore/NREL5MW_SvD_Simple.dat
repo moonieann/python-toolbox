@@ -22,7 +22,7 @@ False         Echo         - Echo input data to <RootName>.ech (flag)
 True          GenTiStr     - Method to start the generator {T: timed using TimGenOn, F: generator speed using SpdGenOn} (flag)
 True          GenTiStp     - Method to stop the generator {T: timed using TimGenOf, F: when generator power = 0} (flag)
        10.0   SpdGenOn     - Generator speed to turn on the generator for a startup (HSS speed) (rpm) [used only when GenTiStr=False]
-         5   TimGenOn     - Time to turn on the generator for a startup (s) [used only when GenTiStr=True]
+         5    TimGenOn     - Time to turn on the generator for a startup (s) [used only when GenTiStr=True]
      9999.9   TimGenOf     - Time to turn off the generator (s) [used only when GenTiStp=True]
 ---------------------- SIMPLE VARIABLE-SPEED TORQUE CONTROL --------------------
      1162.0   VS_RtGnSp    - Rated generator speed for simple variable-speed generator control (HSS side) (rpm) [used only when VSContrl=1]
@@ -91,8 +91,8 @@ false         DLL_Ramp     - Whether a linear ramp should be used between DLL_DT
  GenSpd_TLU   GenTrq_TLU
  (rpm)          (Nm)
 ---------------------- OUTPUT --------------------------------------------------
-False          SumPrint     - Print summary data to <RootName>.sum (flag) (currently unused)
-          1   OutFile      - Switch to determine where output will be placed: {1: in module output file only; 2: in glue code output file only; 3: both} (currently unused)
+False         SumPrint     - Print summary data to <RootName>.sum (flag) (currently unused)
+     3        OutFile      - Switch to determine where output will be placed: {1: in module output file only; 2: in glue code output file only; 3: both} (currently unused)
 True          TabDelim     - Use tab delimiters in text tabular output file? (flag) (currently unused)
 "ES10.3E2"    OutFmt       - Format used for text tabular output (except time).  Resulting field should be 10 characters. (quoted string) (currently unused)
          30   TStart       - Time to begin tabular output (s) (currently unused)
