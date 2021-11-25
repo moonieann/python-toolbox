@@ -8,33 +8,37 @@ from builtins import str
 from future import standard_library
 standard_library.install_aliases()
 try:
-    from .file import File, WrongFormatError, BrokenFormatError
+    from file import File, WrongFormatError, BrokenFormatError, EmptyFileError
 except:
     # --- Allowing this file to be standalone..
     class WrongFormatError(Exception):
         pass
+
     class BrokenFormatError(Exception):
         pass
+
     class File(dict):
-        def __init__(self,filename=None):
-            self._size=None
-            self._encoding=None
+        def __init__(self, filename=None):
+            self._size = None
+            self._encoding = None
             if filename:
                 self.filename = filename
                 self.read()
             else:
                 self.filename = None
+
         def read(self, filename=None):
             if filename:
                 self.filename = filename
             if self.filename:
                 if not os.path.isfile(self.filename):
-                    raise OSError(2,'File not found:',self.filename)
+                    raise OSError(2, 'File not found:', self.filename)
                 if os.stat(self.filename).st_size == 0:
-                    raise EmptyFileError('File is empty:',self.filename)
+                    raise EmptyFileError('File is empty:', self.filename)
                 self._read()
             else:
                 raise Exception('No filename provided')
+
         def write(self, filename=None):
             if filename:
                 self.filename = filename
@@ -42,6 +46,7 @@ except:
                 self._write()
             else:
                 raise Exception('No filename provided')
+
         def toDataFrame(self):
             return self._toDataFrame()
 from file import File, WrongFormatError, BrokenFormatError
@@ -110,7 +115,6 @@ class FASTInputFile(File):
             raise KeyError('Variable `' + label+'` not found in FAST file:'+self.filename)
         else:
             return i
-
 
     def getIDs(self, label):
         I = []
@@ -811,18 +815,18 @@ class FASTInputFile(File):
                         nt = int(self['T']/self['dt'])+1
                     except:
                         raise BrokenFormatError('Cannot read loading since time step and simulation time not properly set.')
-                    self.addKeyVal('Loading',readmat(nt,nDOFCommon+1,lines,i+2))
-                    i=i+nt+1
-                elif len(l)>0:
-                    if l[0]=='!':
-                        if l.find('!dimension')==0:
-                            self.addKeyVal('nDOF',int(l.split(':')[1]))
-                            nDOFCommon=self['nDOF']
-                        elif l.find('!time increment')==0:
-                            self.addKeyVal('dt',float(l.split(':')[1]))
-                        elif l.find('!total simulation time')==0:
-                            self.addKeyVal('T',float(l.split(':')[1]))
-                    elif len(l.strip())==0:
+                    self.addKeyVal('Loading', readmat(nt, nDOFCommon+1, lines, i+2))
+                    i = i+nt+1
+                elif len(l) > 0:
+                    if l[0] == '!':
+                        if l.find('!dimension') == 0:
+                            self.addKeyVal('nDOF', int(l.split(':')[1]))
+                            nDOFCommon = self['nDOF']
+                        elif l.find('!time increment') == 0:
+                            self.addKeyVal('dt', float(l.split(':')[1]))
+                        elif l.find('!total simulation time') == 0:
+                            self.addKeyVal('T', float(l.split(':')[1]))
+                    elif len(l.strip()) == 0:
                         pass
                     else:
                         raise BrokenFormatError('Unexcepted content found on line {}'.format(i))
@@ -867,15 +871,15 @@ class FASTInputFile(File):
                     d['descr'] = ' '.join(splits[1:])             # TODO
                     d['value'] = float(splits[0])
                     self.data.append(d)
-                #pass
-                #for i in range(2,14):
-                nTabLines=0
-                while 14+nTabLines<len(lines) and  len(lines[14+nTabLines].strip())>0 :
-                    nTabLines +=1
-                #data = np.array([lines[i].strip().split() for i in range(14,len(lines)) if len(lines[i])>0]).astype(float)
-                #data = np.array([lines[i].strip().split() for i in takewhile(lambda x: len(lines[i].strip())>0, range(14,len(lines)-1))]).astype(float)
-                data = np.array([lines[i].strip().split() for i in range(14,nTabLines+14)]).astype(float)
-                #print(data)
+                # pass
+                # for i in range(2,14):
+                nTabLines = 0
+                while 14+nTabLines < len(lines) and  len(lines[14+nTabLines].strip()) > 0:
+                    nTabLines += 1
+                # data = np.array([lines[i].strip().split() for i in range(14,len(lines)) if len(lines[i])>0]).astype(float)
+                # data = np.array([lines[i].strip().split() for i in takewhile(lambda x: len(lines[i].strip())>0, range(14,len(lines)-1))]).astype(float)
+                data = np.array([lines[i].strip().split() for i in range(14, nTabLines+14)]).astype(float)
+                # print(data)
                 d = getDict()
                 d['label']     = 'Polar'
                 d['tabDimVar'] = nTabLines
@@ -905,11 +909,11 @@ class FASTInputFile(File):
                 span[j] = float(lines[i])
                 i += 1
                 # Read stiffness matrix
-                K[j,:,:]=np.array((' '.join(lines[i:i+6])).split()).astype(float).reshape(6,6)
-                i+=7
+                K[j, :, :] = np.array((' '.join(lines[i:i+6])).split()).astype(float).reshape(6, 6)
+                i += 7
                 # Read mass matrix
-                M[j,:,:]=np.array((' '.join(lines[i:i+6])).split()).astype(float).reshape(6,6)
-                i+=7
+                M[j, :, :] = np.array((' '.join(lines[i:i+6])).split()).astype(float).reshape(6, 6)
+                i += 7
         except: 
             raise WrongFormatError('An error occured while reading section {}/{}'.format(j+1, nStations))
         d = getDict()
