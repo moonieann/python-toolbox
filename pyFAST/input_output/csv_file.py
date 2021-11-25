@@ -8,6 +8,7 @@ import os
 from file import File, WrongFormatError
 import pandas as pd
 
+
 class CSVFile(File):
     """ 
     Read/write a CSV file. 
@@ -33,27 +34,27 @@ class CSVFile(File):
     def formatName():
         return 'CSV file'
 
-    def __init__(self, filename=None, sep=None, colNames=[], commentChar=None, commentLines=[],\
-                       colNamesLine=None, detectColumnNames=True, header=None, **kwargs):
+    def __init__(self, filename=None, sep=None, colNames=[], commentChar=None, commentLines=[],
+                 colNamesLine=None, detectColumnNames=True, header=None, **kwargs):
         self.sep          = sep
         self.colNames     = colNames
         self.commentChar  = commentChar
         self.commentLines = commentLines
         self.colNamesLine = colNamesLine
         self.detectColumnNames = detectColumnNames
-        self.data=[]
+        self.data = []
         if header is None:
-            self.header=[]
+            self.header = []
         else:
             if not hasattr(header, '__len__'):
-                self.header=[header]
+                self.header = [header]
             else:
-                self.header=header
-        self.nHeader=0
-        if (len(self.commentLines)>0) and (self.commentChar is not None):
-        self.data = []
-        self.header = []
+                self.header = header
         self.nHeader = 0
+        if (len(self.commentLines) > 0) and (self.commentChar is not None):
+            self.data = []
+            self.header = []
+            self.nHeader = 0
         if (len(self.commentLines) > 0) and (self.commentChar is not None):
             raise Exception('Provide either `commentChar` or `commentLines` for CSV file types')
         if (len(self.colNames) > 0) and (self.colNamesLine is not None):
@@ -101,19 +102,19 @@ class CSVFile(File):
         if self.sep == '' or self.sep == ' ':
             self.sep = r'\s+'
 
-        iStartLine=0
+        iStartLine = 0
 
         # --- Exclude some files from the CSV reader ---
-        line=readline(iStartLine)
-        words=line.split()
-        if len(words)>1:
+        line = readline(iStartLine)
+        words = line.split()
+        if len(words) > 1:
             try:
                 int(words[0])
                 word0int = True
             except:
                 word0int = False
             if word0int and words[1].isalpha():
-                raise WrongFormatError('Input File {}: '.format(self.filename) + 'is not likely a CSV file' )
+                raise WrongFormatError('Input File {}: '.format(self.filename) + 'is not likely a CSV file')
 
         # --- Headers (i.e. comments)
         # TODO: read few headers lines instead of multiple read below..
@@ -267,7 +268,7 @@ class CSVFile(File):
                 f.write('\n'.join(self.header)+'\n')
             with open(self.filename, 'a', encoding='utf-8') as f:
                 try:
-                    self.data.to_csv(f,   sep=self.sep,     index=False,header=False, line_terminator='\n')
+                    self.data.to_csv(f, sep=self.sep, index=False, header=False, line_terminator='\n')
                 except TypeError:
                     print('[WARN] CSVFile: Pandas failed, likely encoding error. Attempting a quick and dirty fix.')
                     s = ''
