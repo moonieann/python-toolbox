@@ -10,8 +10,8 @@ False         Echo               - Echo the input to "<rootname>.AD.ech"?  (flag
 True          TwrAero            - Calculate tower aerodynamic loads? (flag)
 True          FrozenWake         - Assume frozen wake during linearization? (flag) [used only when WakeMod=1 and when linearizing]
 True          CavitCheck         - Perform cavitation check? (flag) [AFAeroMod must be 1 when CavitCheck=true]
-False         CompAA             - Flag to compute AeroAcoustics calculation [used only when WakeMod = 1 or 2]
-"unused"      AA_InputFile       - AeroAcoustics input file [used only when CompAA=true]
+True          CompAA             - Flag to compute AeroAcoustics calculation [used only when WakeMod = 1 or 2]
+"../5MW_Baseline/NRELOffshrBsline5MW_AeroDyn_blade.dat"      AA_InputFile       - AeroAcoustics input file [used only when CompAA=true]
 ======  Environmental Conditions  ===================================================================
       1.225   AirDens            - Air density (kg/m^3)
   1.464E-05   KinVisc            - Kinematic air viscosity (m^2/s)

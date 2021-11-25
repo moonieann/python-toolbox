@@ -7,6 +7,7 @@ Created on Wed Jan 22 2020
 import os, glob, struct
 import numpy as np
 
+
 class TSCaseCreation:
     
     def __init__(self,prefix='FFarm'):
