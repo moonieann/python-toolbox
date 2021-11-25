@@ -43,7 +43,7 @@ True          FLookup            - Flag to indicate whether a lookup for f' will
           2   InCol_Cl           - The column in the airfoil tables that contains the lift coefficient (-)
           3   InCol_Cd           - The column in the airfoil tables that contains the drag coefficient (-)
           4   InCol_Cm           - The column in the airfoil tables that contains the pitching-moment coefficient; use zero if there is no Cm column (-)
-          0   InCol_Cpmin        - The column in the airfoil tables that contains the Cpmin coefficient; use zero if there is no Cpmin column (-)
+          2   InCol_Cpmin        - The column in the airfoil tables that contains the Cpmin coefficient; use zero if there is no Cpmin column (-)
           8   NumAFfiles         - Number of airfoil files used (-)
 "../5MW_Baseline/Airfoils/Cylinder1.dat"    AFNames            - Airfoil file names (NumAFfiles lines) (quoted strings)
 "../5MW_Baseline/Airfoils/Cylinder2.dat"
@@ -81,7 +81,22 @@ False          SumPrint            - Generate a summary file listing input optio
           0   NTwOuts             - Number of tower node outputs [0 - 9]  (-)
           1,          2,          6    TwOutNd             - Tower nodes whose values will be output  (-)
                    OutList             - The next line(s) contains a list of output parameters.  See OutListParameters.xlsx for a listing of available output channels, (-)
-"RtAeroCp"
-"RtAeroCt"
+RtSpeed
+RtTSR
+RtVAvgxh
+RtVAvgyh
+RtVAvgzh
+RtSkew
+RtAeroFxh
+RtAeroFyh
+RtAeroFzh
+RtAeroMxh
+RtAeroMyh
+RtAeroMzh
+RtAeroPwr
+RtArea
+RtAeroCp
+RtAeroCq
+RtAeroCt
 END of input file (the word "END" must appear in the first 3 columns of this last OutList line)
 ---------------------------------------------------------------------------------------

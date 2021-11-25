@@ -21,7 +21,7 @@ def CPLambdaExample():
     Lambda = np.linspace(0.1, 10, 3)
     Pitch  = np.linspace(-10, 10, 4)
 
-    CP, CT, Lambda, Pitch, MaxVal, result = case_gen.CPCT_LambdaPitch(ref_dir, main_file, Lambda, Pitch, fastExe=FAST_EXE, showOutputs=False, nCores=4, TMax=10)
+    CP, CT, Lambda, Pitch, MaxVal, result = case_gen.CPCT_LambdaPitch(ref_dir, main_file, Lambda, Pitch, fastExe=FAST_EXE, showOutputs=True, nCores=4, TMax=10)
 
     print('CP max', MaxVal)
 

@@ -28,7 +28,7 @@ def PowerCurveParametricExample1():
     # ref_dir   = os.path.join(MyDir, '../../../data/NREL5MW/')     # Folder where the fast input files are located (will be copied)
     FAST_EXE = 'openfast_x64'              # TODO
     ref_dir = os.path.dirname('NREL5MW')        # TODO
-    main_file = 'E:/Documents/Git/OpenFAST/python-toolbox/data/NREL5MW/Main_Onshore_OF2.fst'               # Main file in ref_dir, used as a template
+    main_file = 'Main_Onshore_OF2.fst'               # Main file in ref_dir, used as a template
     work_dir  = '_NREL5MW_PowerCurveParametric/'     # Output folder (will be created)
 
     # --- Defining the parametric study  (list of dictionnaries with keys as FAST parameters)
@@ -59,7 +59,7 @@ def PowerCurveParametricExample1():
     runner.writeBatch(os.path.join(work_dir, '_RUN_ALL.bat'), fastFiles, fastExe=FAST_EXE)
     # --- Running the simulations
     print('>>> Running {} simulations in {} ...'.format(len(fastFiles), work_dir))
-    runner.run_fastfiles(fastFiles, fastExe=FAST_EXE, parallel=True, showOutputs=False, nCores=2)
+    runner.run_fastfiles(fastFiles, fastExe=FAST_EXE, parallel=True, showOutputs=True, nCores=2)
 
     # --- Simple Postprocessing
     outFiles = [os.path.splitext(f)[0]+'.outb' for f in fastFiles]
@@ -87,9 +87,9 @@ def PowerCurveParametricExample2():
     # --- Parameters for this script
     # FAST_EXE  = os.path.join(MyDir, '../../../data/openfast_x64.exe')       # Location of a FAST exe (and dll)
     # ref_dir   = os.path.join(MyDir, '../../../data/NREL5MW/')     # Folder where the fast input files are located (will be copied)
-    FAST_EXE = os.path.abspath('E:/Documents/Git/OpenFAST/python-toolbox/pyFAST/case_generation/openfast_x64.exe')    # TODO
+    FAST_EXE = os.path.abspath('../openfast_x64.exe')
     ref_dir = os.path.abspath('E:/Documents/Git/OpenFAST/python-toolbox/data/NREL5MW/')                                # TODO
-    main_file = 'E:/Documents/Git/OpenFAST/python-toolbox/data/NREL5MW/Main_Onshore_OF2.fst'                # Main file in ref_dir, used as a template
+    main_file = 'Main_Onshore_OF2.fst'                # Main file in ref_dir, used as a template
     work_dir  = '_NREL5MW_PowerCurveParametric2/'     # Output folder (will be created)
     out_Ext   = '.outb'                           # Output extension
 
@@ -107,7 +107,7 @@ def PowerCurveParametricExample2():
     runner.writeBatch(os.path.join(work_dir, '_RUN_ALL.bat'), fastFiles, fastExe=FAST_EXE)
 
     # --- Running the simulations
-    runner.run_fastfiles(fastFiles, fastExe=FAST_EXE, parallel=True, showOutputs=False, nCores=2)
+    runner.run_fastfiles(fastFiles, fastExe=FAST_EXE, parallel=True, showOutputs=True, nCores=2)
 
     # --- Simple Postprocessing
     outFiles = [os.path.splitext(f)[0]+out_Ext for f in fastFiles]

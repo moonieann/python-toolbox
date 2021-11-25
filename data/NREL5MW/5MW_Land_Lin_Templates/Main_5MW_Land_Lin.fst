@@ -49,8 +49,8 @@ False         CalcSteady    - Calculate a steady-state periodic operating point 
 0.0           Bld_Kdmp - Damping factor for the blade (N/(m/s)) [>=0] [used only when CalcSteady=True]
 1             NLinTimes     - Number of times to linearize (-) [>=1] [unused if Linearize=False]
 100 LinTimes - List of times at which to linearize (s) [1 to NLinTimes] [unused if Linearize=False]
-          0   LinInputs       - Inputs included in linearization (switch) {0=none; 1=standard; 2=all module inputs (debug)} [unused if Linearize=False]
-          0   LinOutputs      - Outputs included in linearization (switch) {0=none; 1=from OutList(s); 2=all module outputs (debug)} [unused if Linearize=False]
+          2   LinInputs       - Inputs included in linearization (switch) {0=none; 1=standard; 2=all module inputs (debug)} [unused if Linearize=False]
+          2   LinOutputs      - Outputs included in linearization (switch) {0=none; 1=from OutList(s); 2=all module outputs (debug)} [unused if Linearize=False]
 False         LinOutJac       - Include full Jacobians in linearization output (for debug) (flag) [unused if Linearize=False; used only if LinInputs=LinOutputs=2]
 False         LinOutMod       - Write module-level linearization output files in addition to output for full system? (flag) [unused if Linearize=False]
 ---------------------- VISUALIZATION ------------------------------------------
