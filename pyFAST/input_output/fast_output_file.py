@@ -13,7 +13,7 @@ standard_library.install_aliases()
 from itertools import takewhile
 
 from file import File, WrongFormatError, BrokenReaderError
-from csv_file import CSVFile
+from  csv_file import CSVFile
 import numpy as np
 import pandas as pd
 import struct
@@ -82,10 +82,9 @@ class FASTOutputFile(File):
             raise WrongFormatError('FAST Out File {}: {}'.format(self.filename, e.args))
 
         if self.info['attribute_units'] is not None:
-            self.info['attribute_units'] = [re.sub(r'[()\[\]]','',u) for u in self.info['attribute_units']]
+            self.info['attribute_units'] = [re.sub(r'[()\[\]]', '', u) for u in self.info['attribute_units']]
 
-
-    def _write(self): 
+    def _write(self):
         if self['binary']:
             # TODO
             raise NotImplementedError()
@@ -222,7 +221,6 @@ def load_binary_output(filename, use_buffer=True):
         except:
             raise Exception('Read only %d of %d values in file:' % (nIntRead, n, filename))
         return data
-
 
     FileFmtID_WithTime              = 1         # File identifiers used in FAST
     FileFmtID_WithoutTime           = 2
