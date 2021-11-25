@@ -16,7 +16,7 @@ import re
 from pyFAST.input_output.fast_input_file import FASTInputFile
 from pyFAST.input_output.fast_output_file import FASTOutputFile
 
-FAST_EXE = 'openfast_x64'
+FAST_EXE = './openfast_x64.exe'
 
 # --------------------------------------------------------------------------------}
 # --- Tools for executing FAST
@@ -171,6 +171,7 @@ def removeFASTOuputs(workDir):
         os.remove(f)
     for f in glob.glob(os.path.join(workDir, '*.sum')):
         os.remove(f)
+
 
 '''
 if __name__ == '__main__':

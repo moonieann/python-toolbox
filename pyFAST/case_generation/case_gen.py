@@ -156,11 +156,11 @@ def templateReplaceGeneral(PARAMS, templateDir=None, outputDir=None, main_file=N
                 newfilename      = strID+ext
             else:
                 newfilename, newfilename_full = rebaseFileName(templatefilename, workDir, strID)
-            print('--------------------------------------------------------------')
-            print('TemplateFile    :', templatefilename)
-            print('TemplateFileFull:', templatefilename_full)
-            print('NewFile         :', newfilename)
-            print('NewFileFull     :', newfilename_full)
+            # print('--------------------------------------------------------------')
+            # print('TemplateFile    :', templatefilename)
+            # print('TemplateFileFull:', templatefilename_full)
+            # print('NewFile         :', newfilename)
+            # print('NewFileFull     :', newfilename_full)
             shutil.copyfile(templatefilename_full, newfilename_full)
             f = fi.FASTInputFile(newfilename_full)    # open the template file for that filekey
             Files[FileKey] = f              # store it
