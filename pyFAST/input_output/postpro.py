@@ -757,24 +757,23 @@ def remap_df(df, ColMap, bColKeepNewOnly=False, inPlace=False, dataDict=None, ve
     """
     # Insert dataDict into namespace
     if dataDict is not None:
-        for k,v in dataDict.items():
-            exec('{:s} = dataDict["{:s}"]'.format(k,k))
-
+        for k, v in dataDict.items():
+            exec('{:s} = dataDict["{:s}"]'.format(k, k))
 
     if not inPlace:
-        df=df.copy()
-    ColMapMiss=[]
-    ColNew=[]
-    RenameMap=dict()
+        df = df.copy()
+    ColMapMiss = []
+    ColNew = []
+    RenameMap = dict()
     # Loop for expressions
-    for k0,v in ColMap.items():
-        k=k0.strip()
-        v=v.strip()
-        if v.find('{')>=0:
+    for k0, v in ColMap.items():
+        k = k0.strip()
+        v = v.strip()
+        if v.find('{') >= 0:
             search_results = re.finditer(r'\{.*?\}', v)
-            expr=v
+            expr = v
             if verbose:
-                print('Attempt to insert column {:15s} with expr {}'.format(k,v))
+                print('Attempt to insert column {:15s} with expr {}'.format(k, v))
             # For more advanced operations, we use an eval
             bFail = False
             for item in search_results:
@@ -798,10 +797,10 @@ def remap_df(df, ColMap, bColKeepNewOnly=False, inPlace=False, dataDict=None, ve
                 RenameMap[k] = v
 
     # Applying renaming only now so that expressions may be applied in any order
-    for k,v in RenameMap.items():
+    for k, v in RenameMap.items():
         if verbose:
-            print('Renaming column {:15s} > {}'.format(v,k))
-        k=k.strip()
+            print('Renaming column {:15s} > {}'.format(v, k))
+        k = k.strip()
         iCol = list(df.columns).index(v)
         df.columns.values[iCol] = k
         ColNew.append(k)
@@ -1202,6 +1201,7 @@ def averagePostPro(outFiles, avgMethod='periods', avgParam=None, ColMap=None, Co
         print('[WARN] There were {} missing/invalid files: {}'.format(len(invalidFiles), invalidFiles))
 
     return result 
+
 
 '''
 if __name__ == '__main__':
