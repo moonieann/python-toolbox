@@ -158,12 +158,12 @@ class TurbSimFile(File):
             f.write(info.encode())
             try:
                 for it in np.arange(nt):
-                    f.write(out[:,it,:,:].tobytes(order='F'))
-                    f.write(outTwr[:,it,:].tobytes(order='F'))
+                    f.write(out[:, it, :, :].tobytes(order='F'))
+                    f.write(outTwr[:, it, :].tobytes(order='F'))
             except:
                 for it in np.arange(nt):
-                    f.write(out[:,it,:,:].tostring(order='F'))
-                    f.write(outTwr[:,it,:].tostring(order='F'))
+                    f.write(out[:, it, :, :].tostring(order='F'))
+                    f.write(outTwr[:, it, :].tostring(order='F'))
 
     def hubValues(self, zHub=None):
         if zHub is None:
