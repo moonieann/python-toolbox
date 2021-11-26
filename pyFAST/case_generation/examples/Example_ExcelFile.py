@@ -10,13 +10,13 @@ import pyFAST.input_output.postpro as postpro
 import weio.excel_file as ioexcel
 
 # Get current directory so this script can be called from any location
-MyDir = os.path.dirname(__file__)
+# MyDir = os.path.dirname(__file__)
 
 
 def main():
     # --- Main Parameters
-    ref_dir        = os.path.join(MyDir, '../../../data/NREL5MW/')      # Folder where the fast input files are located (will be copied)
-    FAST_EXE       = os.path.join(MyDir, '../openfast_x64.exe')         # Location of a FAST exe (and dll)
+    ref_dir        = os.path.abspath('../../../data/NREL5MW/')      # Folder where the fast input files are located (will be copied)
+    FAST_EXE       = os.path.abspath('../openfast_x64.exe')         # Location of a FAST exe (and dll)
     main_file      = 'Main_Onshore_OF2.fst'          # Main file in ref_dir, used as a template
     work_dir       = '_NREL5MW_ParametricExcel/'     # Output folder (will be created)
     parametricFile = 'ParametricExcel.xlsx'          # Excel file containing set of parameters
@@ -31,7 +31,7 @@ def main():
     # --- Running fast simulations
     print('>>> Running {} simulations in {} ...'.format(len(fastFiles), work_dir))
     runner.writeBatch(os.path.join(work_dir, '_RUN_ALL.bat'), fastFiles, fastExe=FAST_EXE)
-    runner.run_fastfiles(fastFiles, showOutputs=False, fastExe=FAST_EXE, nCores=4)
+    runner.run_fastfiles(fastFiles, showOutputs=True, fastExe=FAST_EXE, nCores=4)
 
     # --- Postpro - Computing averages at the end of the simluation
     print('>>> Postprocessing...')
